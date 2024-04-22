@@ -1,9 +1,9 @@
-const { create_connection } = require("../connection");
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
 
 const get_users = async () => {
-  const connection = await create_connection();
-  const [rows] = await connection.query("SELECT * FROM users");
-  return rows;
+  const users = await prisma.user.findMany();
+  return users;
 };
 
 module.exports = {
